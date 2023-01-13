@@ -44,11 +44,27 @@ class UserServices{
                 throw{error: "passwaord doesnot match"}
             }
             // password matched then we will generate the token for the user
-            const token = await this.createToken({email:userObject.email,userId:userObject.userId})
+            const token = await this.createToken({email:userObject.email,userId:userObject.userId,id:userObject.id})
             return token;
         }catch(error){
             console.log("getting error in signIn process")
             throw error
+        }
+    }
+
+    async isAuthenticated(token){
+        try{
+            const userData = await this.verifyToken(token)
+            const checkDB = await this.userRepository.getById(userData.id)
+            if(!checkDB){
+                throw{error: "user no longer exist in db"}
+            }
+
+            return checkDB.id
+
+        }catch(error){
+            console.log("something went wrong while autheticating")
+            throw{error}
         }
     }
 

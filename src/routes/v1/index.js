@@ -6,4 +6,5 @@ const routes = express.Router()
 
 routes.post('/signup',signup.signUpValidatores,UserContoller.createUser)
 routes.post('/signin',signin.signinValidatores,UserContoller.signIn)
+routes.get('/authenticated',UserContoller.isAuthenticated)
 module.exports = routes
