@@ -5,6 +5,8 @@ const apiRoutes = require('./routes/index')
 
 const {Port} = require('./config/serverConfig')
 
+
+
 const createServer = async () => {
 
     const app = express()
@@ -13,6 +15,7 @@ const createServer = async () => {
     app.use(bodyparser.urlencoded({extended:true}))
 
     app.use('/api',apiRoutes)
+
 
     app.listen(Port,()=>{
         console.log("server started at " + Port)

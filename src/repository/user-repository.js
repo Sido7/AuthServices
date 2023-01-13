@@ -28,6 +28,18 @@ class UserRepository{
             throw{error}
         }
     }
+
+    async getById(id){
+        try{
+            const data = await user.findByPk(id,{
+                attributes: ['id','email','userId']
+            })
+            console.log(data)
+        }catch(error){
+            console.log("not able to find user by the provided id")
+            throw{error}
+        }
+    }
 }
 
 module.exports = UserRepository;
