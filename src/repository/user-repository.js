@@ -1,3 +1,4 @@
+const { response } = require('express')
 const { user } = require('../models/index')
 
 class UserRepository{
@@ -39,6 +40,19 @@ class UserRepository{
             console.log("not able to find user by the provided id")
             throw{error}
         }
+    }
+
+    async getByEmail(userEmail){
+        try{
+            const response = await user.findOne({
+                email: userEmail
+            })
+            return response
+
+        }catch(error){
+            console.log("getting Error in getByEmail function")
+            throw error
+        }        
     }
 }
 

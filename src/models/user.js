@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false
     },
-    passwaord: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'user',
   });
   user.beforeCreate((data)=>{
-    data.passwaord = bcrypt.hashSync(data.passwaord,Salt)
+    data.password = bcrypt.hashSync(data.password,Salt)
   })
   return user;
 };
