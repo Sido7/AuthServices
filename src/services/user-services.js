@@ -88,8 +88,7 @@ class UserServices{
         }
     }
 
-    async passwordChecker(userPlainPassword,dbEncryptedPassword)
-    {
+    async passwordChecker(userPlainPassword,dbEncryptedPassword){
         try{
             const result = bcrypt.compareSync(userPlainPassword,dbEncryptedPassword)
             return result;
@@ -99,6 +98,15 @@ class UserServices{
             throw{error}
         }
     }
+
+    async isAdmin(userId){
+        try{
+            return await this.userRepository.isAdmin(userId)
+        }catch(error){
+            console.log("Getting problem in isAdmin  function at service Layer")
+            throw{error}
+       }
+   } 
 }
 
 module.exports = UserServices

@@ -1,4 +1,4 @@
-const { user } = require('../models/index')
+const { user,Role } = require('../models/index')
 
 class UserRepository{
     async create(data){
@@ -54,6 +54,22 @@ class UserRepository{
             console.log("getting Error in getByEmail function")
             throw error
         }        
+    }
+
+    async isAdmin(userId){
+        try{
+            const users = await user.findByPk(userId)
+            const role = await Role.findOne({
+                where:{
+                    name:"ADMIN"
+                }
+            })
+            return await users.hasRole(role)
+        }catch(error){
+            console.log("getting Error in isAdmin function")
+            throw error
+        }     
+
     }
 }
 

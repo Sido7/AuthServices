@@ -7,6 +7,8 @@ const {Port,DB_SYNC} = require('./config/serverConfig')
 
 const db  = require('../src/models/index')
 
+const {user,Role} = require('../src/models/index')
+
 
 const createServer = async () => {
 
@@ -17,10 +19,11 @@ const createServer = async () => {
 
     app.use('/api',apiRoutes)
 
-    if(DB_SYNC)
-    {
-        db.sequelize.sync({alert:true})
-    }
+    // if(DB_SYNC)
+    // {
+    //     db.sequelize.sync({alert:true})
+    // }
+
 
     app.listen(Port,()=>{
         console.log("server started at " + Port)

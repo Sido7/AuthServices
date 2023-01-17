@@ -74,8 +74,29 @@ const userServices = new UserServices()
         }
      }
 
+     const isAdmin = async (req,res)=>{
+        try{
+            const response = await userServices.isAdmin(req.body.id)
+           return res.status(200).json({
+                data: response,
+                err: {},
+                success: true,
+                message: "successfully fetched if the user is admin or not"
+            })
+        }catch(error){
+            console.log("getting error in isAdmin at Contoller")
+            return res.status(400).json({
+                data: {},
+                error: error,
+                message: "Getting error in verifying User Role",
+                success: false
+            })
+        }
+     }
+
      module.exports= {
         createUser,
         signIn,
-        isAuthenticated
+        isAuthenticated,
+        isAdmin
      }

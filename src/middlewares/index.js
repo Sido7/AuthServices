@@ -1,4 +1,5 @@
 module.exports = {
     signin: require('./signinReqValidatores'),
-    signup: require('./signupReqValidores')
+    signup: require('./signupReqValidores'),
+    isAdmin: require('./isAdminValidator')
     }
