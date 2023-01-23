@@ -52,6 +52,9 @@ class UserServices{
             return token;
         }catch(error){
             console.log("getting error in signIn process")
+            if(error.name == "AttributeNotFound"){
+                throw error
+            }
             throw error
         }
     }

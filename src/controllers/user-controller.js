@@ -41,10 +41,10 @@ const userServices = new UserServices()
 
         }catch(error){
             console.log("getting error in signIn at Contoller")
-            return res.status(400).json({
+            return res.status(error.statusCode).json({
                 data: {},
-                error: error,
-                message: "Not able to signIn",
+                error: error.explanation,
+                message: error.message,
                 success: false
             })
 

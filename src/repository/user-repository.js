@@ -1,5 +1,7 @@
 const { user,Role } = require('../models/index')
+const ClientError = require('../utils/clientError')
 const ValidationError = require('../utils/validationError')
+const {StatusCodes} = require('http-status-codes')
 
 class UserRepository{
     async create(data){
@@ -55,6 +57,9 @@ class UserRepository{
                 email: userEmail
                 }
             })
+            if(!data){
+                throw new ClientError("AttributeNotFound","Invalid Email sent in the request","Please send a valid Email address as there is no record",StatusCodes.NOT_FOUND)
+            }
             return data
 
         }catch(error){
