@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 
 const {JWT_KEY} = require('../config/serverConfig')
 const user = require('../models/user')
+const AppError = require('../utils/appError')
 
 class UserServices{
     constructor(){
@@ -18,7 +19,10 @@ class UserServices{
         }
         catch(error){
             console.log("something went wrong at service layer")
-            throw{error}
+            if(error.name == "SequelizeValidationError"){
+                throw error
+            }
+            throw error
         }
 
     }

@@ -1,4 +1,5 @@
 const { user,Role } = require('../models/index')
+const ValidationError = require('../utils/validationError')
 
 class UserRepository{
     async create(data){
@@ -7,7 +8,13 @@ class UserRepository{
             return value
 
         }catch(error)
-        {
+        {  // console.log(error)
+            if(error.name == "SequelizeValidationError")
+            {  
+                console.log("creating new validation error")
+                throw new ValidationError(error)
+                
+            }
             console.log("got some error at repository layer")
             throw{error}
         }
@@ -25,7 +32,7 @@ class UserRepository{
         }catch(error)
         {
             console.log("got some error at repository layer")
-            throw{error}
+            throw error
         }
     }
 
@@ -67,7 +74,7 @@ class UserRepository{
             return await users.hasRole(role)
         }catch(error){
             console.log("getting Error in isAdmin function")
-            throw error
+            throw{error}
         }     
 
     }

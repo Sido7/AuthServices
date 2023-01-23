@@ -20,10 +20,10 @@ const userServices = new UserServices()
             })
         }catch(error){
             console.log("facing issue at controller")
-            return res.status(400).json({
+            return res.status(error.statusCode).json({
                 data: {},
-                error: error,
-                message: "could not create user",
+                error: error.explanation,
+                message: error.message,
                 success: false
             })
         }  
@@ -87,7 +87,7 @@ const userServices = new UserServices()
             console.log("getting error in isAdmin at Contoller")
             return res.status(400).json({
                 data: {},
-                error: error,
+                err: error,
                 message: "Getting error in verifying User Role",
                 success: false
             })
