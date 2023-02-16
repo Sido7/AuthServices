@@ -9,7 +9,7 @@ const userServices = new UserServices()
             const data = {
                 email: req.body.email,
                 userId: req.body.userId,
-                password: req.body.password
+                password: req.body.password,
             }
             const user =  await userServices.create(req.body)
             return res.status(201).json({
@@ -53,6 +53,7 @@ const userServices = new UserServices()
 
      const isAuthenticated = async (req,res) => {
         try{
+            console.log("hitting")
             const response = await userServices.isAuthenticated(req.headers['x-access-token'])
             return res.status(201).json({
                 data: response,
@@ -94,9 +95,31 @@ const userServices = new UserServices()
         }
      }
 
+     const addRole = async (req,res)=>{
+        try{
+            const response = await userServices.addrole(req.body)
+            return res.status(201).json({
+                data: response,
+                err: {},
+                success: true,
+                message: "successfully added role to the user"
+            })
+        }catch(error){
+            console.log("getting error in isAdmin at Contoller")
+            return res.status(400).json({
+                data: {},
+                err: error,
+                message: "Does not have sufficient permission to add role",
+                success: false
+            })
+        }
+
+     }
+
      module.exports= {
         createUser,
         signIn,
         isAuthenticated,
-        isAdmin
+        isAdmin,
+        addRole
      }

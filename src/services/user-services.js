@@ -15,6 +15,8 @@ class UserServices{
     async create(data){
         try{
             const user =  await this.userRepository.create(data)
+            console.log(user.id,data.role)
+             await this.userRepository.addingRole(user.id)
             return user;
         }
         catch(error){
@@ -104,6 +106,24 @@ class UserServices{
             console.log("Getting problem in passwordChecker function")
             throw{error}
         }
+    }
+
+    async  addrole(data){
+        try{
+            const admincheck = await this.isAdmin(data.id)
+        if(admincheck){
+            await this.userRepository.addingRole(data.userId,data.role)
+            return true
+        }
+        else 
+        {
+            throw {error: "Does not have sufficient permission to add role"}
+        }
+
+        }catch(error){
+            throw error
+        }
+
     }
 
     async isAdmin(userId){

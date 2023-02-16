@@ -8,5 +8,6 @@ routes.post('/signup',signup.signUpValidatores,UserContoller.createUser)
 routes.post('/signin',signin.signinValidatores,UserContoller.signIn)
 routes.get('/authenticated',UserContoller.isAuthenticated)
 routes.get('/isadmin',isAdmin.validateIsAdmin,UserContoller.isAdmin)
+routes.get('/addrole',UserContoller.addRole)
 
 module.exports = routes

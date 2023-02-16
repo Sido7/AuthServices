@@ -19,7 +19,7 @@ const createServer = async () => {
 
     app.use('/api',apiRoutes)
 
-    // if(DB_SYNC)
+    //  if(DB_SYNC)
     // {
     //     db.sequelize.sync({alert:true})
     // }

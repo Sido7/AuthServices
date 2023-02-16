@@ -10,14 +10,8 @@ console.log(userRepository)
 
 
 async function hecking(){
-    const data = {
-        email : "sniht@g.com",
-        userId: "SnID0",
-        passwaord: "dhdsosos"
-    }
-   // const chikku = await user.create(data)
-    const chikku = await userRepository.create(data)
-    console.log(chikku)
+    const data = await userRepository.isAdmin(1)
+    console.log(data)
 }
 
 async function checking(){

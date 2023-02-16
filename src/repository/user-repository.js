@@ -4,8 +4,13 @@ const ValidationError = require('../utils/validationError')
 const {StatusCodes} = require('http-status-codes')
 
 class UserRepository{
-    async create(data){
+    async create(payload){
         try{
+            const data = {
+                email: payload.email,
+                password: payload.password,
+                userId: payload.userId
+            }
             const value  = await user.create(data)
             return value
 
@@ -67,6 +72,22 @@ class UserRepository{
             throw error
         }        
     }
+
+    async addingRole(userId,role="USER"){
+        try{
+            const person = await user.findByPk(userId)
+            const position = await Role.findOne({
+                where:{
+                    name : role
+                }
+            })
+           await person.addRole(position)
+        }catch(error){
+            console.log("something went wrong while adding the role")
+            throw error
+        }
+    }
+
 
     async isAdmin(userId){
         try{
